@@ -1,2 +1,0 @@
-# HOMEWORK
-QG大组作业
