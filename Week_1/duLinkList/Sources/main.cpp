@@ -1,5 +1,5 @@
-﻿#include <duLinkedList.h>
-#include <iostream>
+﻿#include <iostream>
+#include <duLinkedList.h>
 #include <conio.h>
 #include <Windows.h>
 
