@@ -1,8 +1,9 @@
-#include "../Headers/sort.h"
-#include "../Headers/tools.h"
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
+#include "../inc/binary_sort_tree.h"
+#include "../inc/tools.h"
+
 
 void HideCursor() //隐藏光标
 {
@@ -71,46 +72,6 @@ void HLshow(const char(*p)[W], int n)//高亮显示
     printf("%s", *(p + i));
 }
 
-void DataSave(int scale) /*生成并保存数据*/
-{
-    FILE* fp;
-    if (fopen_s(&fp, "data.txt", "wb")) {
-        fprintf(stderr, "*** 打开数据文件失败! ***\n");
-        exit(EXIT_FAILURE);
-    }
-    srand((unsigned)time(NULL)); /*修改随机数种子*/
-    for (int i = 0; i < scale; i++) {
-        fprintf(fp, "%d ", rand()); /*生成数据写入文件*/
-    }
-    fclose(fp);
-}
-
-int* DataRead(void) /*读取数据*/
-{
-    FILE* fp;
-    int* p;
-    int cnt = 0;
-    if (fopen_s(&fp, "data.txt", "rb")) {
-        fprintf(stderr, "*** 打开数据文件失败! ***\n");
-        exit(EXIT_FAILURE);
-    }
-    p = (int*)malloc(sizeof(int)); /*初始化*/
-    if (p == NULL) {
-        fprintf(stderr, "*** 申请内存空间失败！ ***");
-        exit(EXIT_FAILURE);
-    }
-    while (fscanf_s(fp, "%d", p + cnt) != EOF) {
-        cnt += 1;
-        p = (int*)realloc(p, (cnt + 1) * sizeof(int));
-        if (p == NULL) {
-            fprintf(stderr, "*** 申请内存空间失败！ ***");
-            exit(EXIT_FAILURE);
-        }
-    }
-    fclose(fp);
-    return p; /*返回数据指针*/
-}
-
 void Stop(void) /*暂停*/
 {
     char c = ' ';
@@ -127,3 +88,7 @@ void Fresh_Buffer(void) /*刷新缓冲区*/
     while ((c = getchar()) != '\n' && c != EOF); /*清空输入缓冲区*/
 }
 
+void Visit(NodePtr p)
+{
+    printf("%d，", p->value);
+}
